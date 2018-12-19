@@ -15,17 +15,13 @@ namespace rzeczy
             try
             {
                 menu();
-
             }
-
             catch
             {
                 Console.WriteLine("cos zepsules");
                 Console.ReadLine();
             }
-
         }
-
 
         public static void menu()
         {
@@ -39,17 +35,17 @@ namespace rzeczy
             {
                 case "1":
                     Console.Clear();
-                    Console.WriteLine("Fizzbucc");
+                    Console.WriteLine("Fizzbuzz");
                     Fzbz();
                     break;
                 case "2":
                     Console.Clear();
                     Console.WriteLine("Deepdive");
-                    DeepDrkFntasy();
+                    Deep();
                     break;
                 case "3":
                     Console.Clear();
-                    Console.WriteLine("drownitin");
+                    Console.WriteLine("Drownitin");
                     drown();
                     break;
                 case "4":
@@ -66,7 +62,6 @@ namespace rzeczy
 
         public static void Fzbz()
         {
-
             Console.Clear();
             Console.WriteLine("Podaj Liczbę w przedziale 0-1000:");
             try
@@ -74,7 +69,6 @@ namespace rzeczy
                 int fz = int.Parse(Console.ReadLine());
                 if (fz >= 1 && fz <= 1000)
                 {
-
                     bool fizz = fz % 2 == 0;
                     bool buzz = fz % 3 == 0;
                     if (fizz && buzz)
@@ -116,21 +110,18 @@ namespace rzeczy
                 Console.ReadLine();
                 Fzbz();
             }
-
-
-
         }
 
-        public static void DeepDrkFntasy()
+        public static void Deep()
         {
 
             string[] foldery;
             string dd = "DeepDive";
             foldery = new string[5];
-            string lpulpit = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string pulpit = Path.Combine(lpulpit, dd);
-            if (Directory.Exists(pulpit))
-                Directory.Delete(pulpit, true);
+            string pulpit = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string pulpitdd = Path.Combine(pulpit, dd);
+            if (Directory.Exists(pulpitdd))
+                Directory.Delete(pulpitdd, true);
             Console.Clear();
             Console.WriteLine("Ile folderow zagniezdzic(max 5)");
             Console.WriteLine("folder bazowy utworzony na pulpicie");
@@ -142,17 +133,17 @@ namespace rzeczy
                 int ilosc = int.Parse(Console.ReadLine());
                 if (ilosc >= 1 && ilosc <= 5)
                 {
-                    Directory.CreateDirectory(pulpit + Path.DirectorySeparatorChar + g);
-                    string directory = Path.Combine(pulpit, g.ToString());
+                    Directory.CreateDirectory(pulpitdd + Path.DirectorySeparatorChar + g);
+                    string directory = Path.Combine(pulpitdd, g.ToString());
                     g = Guid.NewGuid();
-                    string glembiej = Path.Combine(directory, g.ToString());
+                    string deeper = Path.Combine(directory, g.ToString());
                     foldery[0] = directory;
                     for (int i = 0; i < ilosc - 1; i++)
                     {
-                        Directory.CreateDirectory(glembiej);
+                        Directory.CreateDirectory(deeper);
                         d = Guid.NewGuid();
-                        foldery[i + 1] = glembiej;
-                        glembiej = Path.Combine(glembiej, d.ToString());
+                        foldery[i + 1] = deeper;
+                        deeper = Path.Combine(deeper, d.ToString());
                     }
                 }
                 else
@@ -186,11 +177,11 @@ namespace rzeczy
         {
             Console.Clear();
             string dd = "DeepDive";
-            string lpulpit = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
-            string pulpit = Path.Combine(lpulpit, dd);
+            string pulpit = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory);
+            string pulpitdd = Path.Combine(pulpit, dd);
             try
             {
-                string[] folders = System.IO.Directory.GetDirectories(pulpit, "*", System.IO.SearchOption.AllDirectories);
+                string[] folders = System.IO.Directory.GetDirectories(pulpitdd, "*", System.IO.SearchOption.AllDirectories);
                 Console.WriteLine("Na ktorym poziomie umiescic plik?:");
                 int poziom = int.Parse(Console.ReadLine());
                 if (File.Exists(folders[poziom - 1] + "/pusty.plik"))
@@ -222,8 +213,6 @@ namespace rzeczy
                         Console.WriteLine(" ");
                         menu();
                     }
-
-
                 }
                 else
                 {
@@ -234,13 +223,12 @@ namespace rzeczy
                     menu();
 
                 }
-
             }
             catch (System.IndexOutOfRangeException)
             {
                 Console.Clear();
                 Console.WriteLine("Nie istnieje tak głęboka struktura");
-                Console.WriteLine("Stworz glebsza modulem deepdive");
+                Console.WriteLine("Stworz glebsza modulem DeepDive");
                 Console.WriteLine(" ");
                 menu();
             }
@@ -251,7 +239,6 @@ namespace rzeczy
                 Console.WriteLine(" ");
                 menu();
             }
-
         }
     }
 }

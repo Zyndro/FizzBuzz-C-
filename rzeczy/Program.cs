@@ -1,29 +1,24 @@
 ﻿using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace rzeczy
 {
     class Program
     {
-
         static void Main(string[] args)
         {
-
             try
             {
-                menu();
+                Menu();
             }
             catch
             {
-                Console.WriteLine("cos zepsules");
+                Console.WriteLine("cos zepsules, albo ja zepsulem");
                 Console.ReadLine();
             }
         }
 
-        public static void menu()
+        public static void Menu()
         {
             Console.WriteLine("1.FizzBuzz");
             Console.WriteLine("2.DeepDive");
@@ -46,7 +41,7 @@ namespace rzeczy
                 case "3":
                     Console.Clear();
                     Console.WriteLine("Drownitin");
-                    drown();
+                    Drown();
                     break;
                 case "4":
                     System.Environment.Exit(0);
@@ -55,7 +50,7 @@ namespace rzeczy
                     Console.Clear();
                     Console.WriteLine("Nieprawidlwa opcja");
                     Console.WriteLine(" ");
-                    menu();
+                    Menu();
                     break;
             }
         }
@@ -89,11 +84,11 @@ namespace rzeczy
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("liczba nie podzielna przez 2 ani 3");
+                        Console.WriteLine("Liczba niepodzielna przez 2 ani 3");
                     }
                     Console.ReadLine();
                     Console.Clear();
-                    menu();
+                    Menu();
                 }
                 else
                 {
@@ -124,7 +119,7 @@ namespace rzeczy
                 Directory.Delete(pulpitdd, true);
             Console.Clear();
             Console.WriteLine("Ile folderow zagniezdzic(max 5)");
-            Console.WriteLine("folder bazowy utworzony na pulpicie");
+            Console.WriteLine("Folder bazowy zostanie utworzony na pulpicie");
             try
             {
                 Guid g;
@@ -151,7 +146,7 @@ namespace rzeczy
                     Console.Clear();
                     Console.WriteLine("nieprawidlowa wartosc");
                     Console.WriteLine(" ");
-                    menu();
+                    Menu();
                 }
             }
             catch
@@ -159,21 +154,20 @@ namespace rzeczy
                 Console.Clear();
                 Console.WriteLine("Wpisano nieprawidlowa wartosc");
                 Console.WriteLine(" ");
-                menu();
+                Menu();
             }
             Console.Clear();
+            Console.WriteLine("Utworzono foldery:");
             Console.WriteLine(foldery[0]);
             Console.WriteLine(foldery[1]);
             Console.WriteLine(foldery[2]);
             Console.WriteLine(foldery[3]);
             Console.WriteLine(foldery[4]);
-            Console.WriteLine("utworzono foldery");
             Console.WriteLine(" ");
-            menu();
-
+            Menu();
         }
 
-        public static void drown()
+        public static void Drown()
         {
             Console.Clear();
             string dd = "DeepDive";
@@ -195,23 +189,23 @@ namespace rzeczy
                     {
                         File.AppendAllText(folders[poziom - 1] + "/pusty.plik", "");
                         Console.Clear();
-                        Console.WriteLine("zapisano");
+                        Console.WriteLine("Zapisano");
                         Console.WriteLine(" ");
-                        menu();
+                        Menu();
                     }
                     if (pytanie == 2)
                     {
                         Console.Clear();
-                        Console.WriteLine("niedokonano zmian");
+                        Console.WriteLine("Niedokonano zmian");
                         Console.WriteLine(" ");
-                        menu();
+                        Menu();
                     }
                     else
                     {
                         Console.Clear();
-                        Console.WriteLine("wybierz prawidlowa opcje");
+                        Console.WriteLine("Wybierz prawidlowa opcje");
                         Console.WriteLine(" ");
-                        menu();
+                        Menu();
                     }
                 }
                 else
@@ -220,8 +214,7 @@ namespace rzeczy
                     Console.Clear();
                     Console.WriteLine("Utworzono plik");
                     Console.WriteLine(" ");
-                    menu();
-
+                    Menu();
                 }
             }
             catch (System.IndexOutOfRangeException)
@@ -230,14 +223,14 @@ namespace rzeczy
                 Console.WriteLine("Nie istnieje tak głęboka struktura");
                 Console.WriteLine("Stworz glebsza modulem DeepDive");
                 Console.WriteLine(" ");
-                menu();
+                Menu();
             }
             catch
             {
                 Console.Clear();
                 Console.WriteLine("Skozystaj najpierw z DeepDive");
                 Console.WriteLine(" ");
-                menu();
+                Menu();
             }
         }
     }

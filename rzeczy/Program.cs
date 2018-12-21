@@ -59,14 +59,27 @@ namespace rzeczy
         {
             Console.Clear();
             Console.WriteLine("Podaj Liczbę w przedziale 0-1000:");
-            try
+            string input = (Console.ReadLine());
+            bool res = int.TryParse(input, out int fz);
+            if (res == false)
             {
-                int fz = int.Parse(Console.ReadLine());
-                if (fz >= 1 && fz <= 1000)
+                Console.Clear();
+                Console.WriteLine("Prosze o wpisanie liczby calkowitej");
+                Console.ReadLine();
+                Fzbz();
+            }
+            else
+            {
+                if (fz >= 0 && fz <= 1000)
                 {
                     bool fizz = fz % 2 == 0;
                     bool buzz = fz % 3 == 0;
-                    if (fizz && buzz)
+                    if (fz == 0)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Wpisano 0");
+                    }
+                    else if (fizz && buzz)
                     {
                         Console.Clear();
                         Console.WriteLine("FizzBuzz");
@@ -98,13 +111,7 @@ namespace rzeczy
                     Fzbz();
                 }
             }
-            catch
-            {
-                Console.Clear();
-                Console.WriteLine("Wpisano nieprawidlowa wartosc");
-                Console.ReadLine();
-                Fzbz();
-            }
+            
         }
 
         public static void Deep()
@@ -118,14 +125,15 @@ namespace rzeczy
             if (Directory.Exists(pulpitdd))
                 Directory.Delete(pulpitdd, true);
             Console.Clear();
-            Console.WriteLine("Ile folderow zagniezdzic(max 5)");
+            Console.WriteLine("Ile folderow zagniezdzic(1-5)");
             Console.WriteLine("Folder bazowy zostanie utworzony na pulpicie");
             try
             {
                 Guid g;
                 Guid d;
                 g = Guid.NewGuid();
-                int ilosc = int.Parse(Console.ReadLine());
+                string input1 = (Console.ReadLine());
+                bool res = int.TryParse(input1, out int ilosc);
                 if (ilosc >= 1 && ilosc <= 5)
                 {
                     Directory.CreateDirectory(pulpitdd + Path.DirectorySeparatorChar + g);
@@ -141,10 +149,24 @@ namespace rzeczy
                         deeper = Path.Combine(deeper, d.ToString());
                     }
                 }
-                else
+                if (res == false)
                 {
                     Console.Clear();
                     Console.WriteLine("nieprawidlowa wartosc");
+                    Console.WriteLine(" ");
+                    Menu();
+                }
+                if (ilosc == 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Utworzono 0 folderow(czyli nie utworzono)");
+                    Console.WriteLine(" ");
+                    Menu();
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("Wartosc przekracza zakres");
                     Console.WriteLine(" ");
                     Menu();
                 }
@@ -156,13 +178,16 @@ namespace rzeczy
                 Console.WriteLine(" ");
                 Menu();
             }
+
+
             Console.Clear();
             Console.WriteLine("Utworzono foldery:");
-            Console.WriteLine(foldery[0]);
-            Console.WriteLine(foldery[1]);
-            Console.WriteLine(foldery[2]);
-            Console.WriteLine(foldery[3]);
-            Console.WriteLine(foldery[4]);
+            string[] folders = System.IO.Directory.GetDirectories(pulpitdd, "*", System.IO.SearchOption.AllDirectories);
+            int foldersLength = folders.Length;
+            for (int i = 0; i < foldersLength; i++)
+            {
+                Console.WriteLine(foldery[i]);
+            }
             Console.WriteLine(" ");
             Menu();
         }
@@ -177,14 +202,37 @@ namespace rzeczy
             {
                 string[] folders = System.IO.Directory.GetDirectories(pulpitdd, "*", System.IO.SearchOption.AllDirectories);
                 Console.WriteLine("Na ktorym poziomie umiescic plik?:");
-                int poziom = int.Parse(Console.ReadLine());
+                string input1 = (Console.ReadLine());
+                bool res = int.TryParse(input1, out int poziom);
+                if (res == false)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Podaj liczbe calkowita");
+                    Console.WriteLine(" ");
+                    Menu();
+                }
+                if (poziom <= 0)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Poziom musi byc wyzszy od 0");
+                    Console.WriteLine(" ");
+                    Menu();
+                }
                 if (File.Exists(folders[poziom - 1] + "/pusty.plik"))
                 {
                     Console.Clear();
                     Console.WriteLine("Plik istnieje");
                     Console.WriteLine("nadpisac?");
                     Console.WriteLine("1.tak 2.nie");
-                    int pytanie = int.Parse(Console.ReadLine());
+                    string input = (Console.ReadLine());
+                    bool res1 = int.TryParse(input, out int pytanie);
+                    if (res1 == false)
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Wybierz prawidlowa opcje, niedokonano zmian");
+                        Console.WriteLine(" ");
+                        Menu();
+                    }
                     if (pytanie == 1)
                     {
                         File.AppendAllText(folders[poziom - 1] + "/pusty.plik", "");
@@ -219,6 +267,7 @@ namespace rzeczy
             }
             catch (System.IndexOutOfRangeException)
             {
+
                 Console.Clear();
                 Console.WriteLine("Nie istnieje tak głęboka struktura");
                 Console.WriteLine("Stworz glebsza modulem DeepDive");
@@ -228,7 +277,7 @@ namespace rzeczy
             catch
             {
                 Console.Clear();
-                Console.WriteLine("Skozystaj najpierw z DeepDive");
+                Console.WriteLine("Najpierw utworz strukture za pomoca DeepDive");
                 Console.WriteLine(" ");
                 Menu();
             }

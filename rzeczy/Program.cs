@@ -116,7 +116,6 @@ namespace rzeczy
 
         public static void Deep()
         {
-
             string[] foldery;
             string dd = "DeepDive";
             foldery = new string[5];
@@ -127,59 +126,42 @@ namespace rzeczy
             Console.Clear();
             Console.WriteLine("Ile folderow zagniezdzic(1-5)");
             Console.WriteLine("Folder bazowy zostanie utworzony na pulpicie");
-            try
-            {
-                Guid g;
-                Guid d;
-                g = Guid.NewGuid();
-                string input1 = (Console.ReadLine());
-                bool res = int.TryParse(input1, out int ilosc);
-                if (ilosc >= 1 && ilosc <= 5)
+            Guid g;
+            Guid d;
+            g = Guid.NewGuid();
+            string input1 = (Console.ReadLine());
+            if (int.TryParse(input1, out int ilosc))
                 {
-                    Directory.CreateDirectory(pulpitdd + Path.DirectorySeparatorChar + g);
-                    string directory = Path.Combine(pulpitdd, g.ToString());
-                    g = Guid.NewGuid();
-                    string deeper = Path.Combine(directory, g.ToString());
-                    foldery[0] = directory;
-                    for (int i = 0; i < ilosc - 1; i++)
+                    if (ilosc >= 1 && ilosc <= 5)
                     {
-                        Directory.CreateDirectory(deeper);
-                        d = Guid.NewGuid();
-                        foldery[i + 1] = deeper;
-                        deeper = Path.Combine(deeper, d.ToString());
+                        Directory.CreateDirectory(pulpitdd + Path.DirectorySeparatorChar + g);
+                        string directory = Path.Combine(pulpitdd, g.ToString());
+                        g = Guid.NewGuid();
+                        string deeper = Path.Combine(directory, g.ToString());
+                        foldery[0] = directory;
+                        for (int i = 0; i < ilosc - 1; i++)
+                        {
+                            Directory.CreateDirectory(deeper);
+                            d = Guid.NewGuid();
+                            foldery[i + 1] = deeper;
+                            deeper = Path.Combine(deeper, d.ToString());
+                        }
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("Podaj liczbe calkowita z przedzialu 1-5");
+                        Console.WriteLine(" ");
+                        Menu();
                     }
                 }
-                if (res == false)
+            else
                 {
                     Console.Clear();
-                    Console.WriteLine("nieprawidlowa wartosc");
+                    Console.WriteLine("Podaj liczbe calkowita z przedzialu 1-5");
                     Console.WriteLine(" ");
                     Menu();
                 }
-                if (ilosc == 0)
-                {
-                    Console.Clear();
-                    Console.WriteLine("Utworzono 0 folderow(czyli nie utworzono)");
-                    Console.WriteLine(" ");
-                    Menu();
-                }
-                else
-                {
-                    Console.Clear();
-                    Console.WriteLine("Wartosc przekracza zakres");
-                    Console.WriteLine(" ");
-                    Menu();
-                }
-            }
-            catch
-            {
-                Console.Clear();
-                Console.WriteLine("Wpisano nieprawidlowa wartosc");
-                Console.WriteLine(" ");
-                Menu();
-            }
-
-
             Console.Clear();
             Console.WriteLine("Utworzono foldery:");
             string[] folders = System.IO.Directory.GetDirectories(pulpitdd, "*", System.IO.SearchOption.AllDirectories);

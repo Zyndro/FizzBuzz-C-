@@ -1,4 +1,4 @@
-# Rzeczy
+# FizzBuzz C#
 
 Aplikację konsolowa z następującymi metodami:
 
